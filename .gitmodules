@@ -1,0 +1,3 @@
+[submodule "calab-verilog"]
+	path = calab-verilog
+	url = git@git.ustc.edu.cn:xyx17/calab-verilog.git

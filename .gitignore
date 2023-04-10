@@ -1,0 +1,6 @@
+*.bin
+*.dump
+*.vcd
+
+obj_dir/
+tb
