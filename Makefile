@@ -20,8 +20,10 @@ TEST_DUMPS = $(patsubst %.S, %.dump, $(TESTS))
 # default cache capacity: 0x4000
 TEXT_BASE ?= 0x0000
 DATA_BASE ?= 0x3000
+# disable gp-relative addressing
 CC = $(CROSS_COMPILE)gcc -march=rv32i -mabi=ilp32 -nostdlib \
-                        -Wl,--section-start=.text=$(TEXT_BASE),--section-start=.data=$(DATA_BASE)
+                        -Wl,--section-start=.text=$(TEXT_BASE),--section-start=.data=$(DATA_BASE) \
+						-Wl,--no-relax 	
 OBJCOPY = $(CROSS_COMPILE)objcopy -O binary
 OBJDUMP = $(CROSS_COMPILE)objdump -b binary -m riscv:rv32 -D
 
