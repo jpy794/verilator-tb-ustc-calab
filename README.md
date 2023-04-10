@@ -1,8 +1,8 @@
-# Simmulate calab-verilog with Verilator
+# Simulate calab-verilog with Verilator
 
 ## Description
 
-This repo allows you to simulate calab-verilog of USTC CompArch course with Verilator instead of Vivado. Building the testbench takes less than 20s and then the simulation can be done almost instantly. It also supports generating waveforms from assmbly sources directly with a simple `make`. You can use waveform viewers like GTKWave to display the `*.vcd`  files.
+This repo allows you to simulate calab-verilog of USTC CompArch course with Verilator instead of Vivado. Building the testbench takes less than 20s and then the simulation can be done almost instantly. It also supports generating waveforms from assembly sources directly with a simple `make`. You can use waveform viewers like GTKWave to display the `*.vcd`  files.
 
 ## Dependencies
 
@@ -11,7 +11,7 @@ This repo allows you to simulate calab-verilog of USTC CompArch course with Veri
 
 If you're using Archlinux, you can install those with
 
-``` shell
+```
 # pacman -S verilator riscv64-elf-gcc
 ```
 
