@@ -1,4 +1,5 @@
 #include "VRV32ICore.h"
+#include "VRV32ICore___024root.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 #include <algorithm>
@@ -8,6 +9,7 @@
 #include <optional>
 #include <string>
 #include <vector>
+#include <iomanip>
 
 using namespace std;
 
@@ -52,9 +54,13 @@ int main(int argc, char *argv[]) {
     cout << "Dumping waveform to " + cfg._vcd_file + '\n';
     vcd->open(cfg._vcd_file.c_str());
 
+    auto passed_cases = 0U;
+
     auto step_one_cycle = [&](bool dump = true, bool time_inc = true) {
         for (auto i = 0; i < 2; i++) {
             rv->eval();
+            auto cur_testcase = rv->rootp->RV32ICore__DOT__RegisterFile1__DOT__reg_file[2U];
+            passed_cases = std::max(passed_cases, cur_testcase);
             if (dump) {
                 vcd->dump(ctx->time());
             }
@@ -110,6 +116,19 @@ int main(int argc, char *argv[]) {
     }
 
     vcd->close();
+    cout << "Passed through " << passed_cases << " cases." << std::endl;
+
+    // print out cpu info
+    cout << setbase(16) << setfill('0') << setw(4);
+    cout << "\e[1mR00\e[0m = 0x" << setw(8) << 0 << " ";
+    for (int i = 1; i < 31; i++) {
+        cout << "\e[1mR" << setw(2) << i << "\e[0m = 0x" << setw(8) << rv->rootp->RV32ICore__DOT__RegisterFile1__DOT__reg_file[i - 1] << " ";
+        if ((i + 1) % 4 == 0) {
+            cout << endl;
+        }
+    }
+    cout << "\e[1mR31\e[0m = 0x" << setw(8) << rv->rootp->RV32ICore__DOT__RegisterFile1__DOT__reg_file[30] << std::endl;
+    cout << "\e[1mPC_IF\e[0m = 0x" << setw(8) << rv->rootp->RV32ICore__DOT__PC_IF << std::endl;
 
     return 0;
 }
