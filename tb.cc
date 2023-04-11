@@ -122,7 +122,7 @@ int main(int argc, char *argv[]) {
     cout << setbase(16) << setfill('0') << setw(4);
     cout << "\e[1mR00\e[0m = 0x" << setw(8) << 0 << " ";
     for (int i = 1; i < 31; i++) {
-        cout << "\e[1mR" << setw(2) << i << "\e[0m = 0x" << setw(8) << rv->rootp->RV32ICore__DOT__RegisterFile1__DOT__reg_file[i - 1] << " ";
+        cout << "\e[1mR" << setw(2) << setbase(10) << i << setbase(16) << "\e[0m = 0x" << setw(8) << rv->rootp->RV32ICore__DOT__RegisterFile1__DOT__reg_file[i - 1] << " ";
         if ((i + 1) % 4 == 0) {
             cout << endl;
         }
